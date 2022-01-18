@@ -18,10 +18,11 @@ from django.urls import path, re_path
 from bananaAPP import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index, name='home'),
-    re_path(r'^about', views.about),
-    re_path(r'^contact', views.contact),
-    path('bananaAPP', views.index_app),
-    path('feedback', views.feedback),
+    path('admin/', admin.site.urls),  # Админка
+    path('', views.index, name='home'),  # Главная страница
+    re_path(r'^about', views.about),  # О нас
+    re_path(r'^contact', views.contact),  # Контакты
+    path('bananaAPP', views.index_app),  # Приложение
+    path('feedback', views.feedback),  # Обратная связь (для юзера)
+    path('getfeedback', views.get_feedback)  # Обратная связь (для админа)
 ]
