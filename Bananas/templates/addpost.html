@@ -1,0 +1,43 @@
+{% extends 'basic.html' %}
+{% block title %}Creating post{% endblock %}
+{% block body %}
+<div class="container ">
+  <main>
+    <div class="py-5 text-center">
+      <div class="display-4">To add post</div>
+    </div>
+      <div class="col-md-12 col-lg-12 align-self-center">
+        <form class="needs-validation" method="post" enctype="multipart/form-data">
+             {{ myform.media }}
+             {% csrf_token %}
+          <div class="row g-1 align-items-center ">
+            <div class="col-md-6 offset-md-2">
+                <p>{{ form.name.label }}</p>
+              {{ form.name }}
+            </div>
+            <div class="col-md-6 offset-md-2">
+                <p>{{ form.preview.label }}</p>
+                {{ form.preview }}
+            </div>
+            <div class="col-md-6 offset-md-2">
+                <p>{{ form.text.label }}</p>
+                {{ form.text }}
+
+            </div>
+            <div class="col-md-6 offset-md-2">
+                <p>{{ form.preview_photo.label }}</p>
+                {{ form.preview_photo }}
+                <button class="btn btn-primary btn-sm" type="submit" style="width:100px">Відправити</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </main>
+</div>
+
+
+
+
+
+{% endblock %}
+

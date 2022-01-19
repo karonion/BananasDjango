@@ -1,4 +1,5 @@
 from django import forms
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 
 class FeedbackForm(forms.Form):  # Форма обратной связи. Страница "Контакты".
@@ -21,6 +22,7 @@ class RegisterForm(forms.Form):  # Форма регистрации.
 
 
 class Addpost(forms.Form):  # Создание поста
-    name = forms.CharField(required=True, label="Ім'я")
-    preview = forms.CharField(required=True, label="Прев'ю")
-    preview_photo = forms.ImageField(required=True, label='Фото')
+    name = forms.CharField(required=True, label="Your name", widget=forms.TextInput(attrs={'size':50, 'rows':'10', 'cols':'10'}))
+    preview = forms.CharField(required=True, label="Preview", widget=forms.TextInput(attrs={'size':50}))
+    text = forms.CharField(widget=SummernoteWidget)
+    preview_photo = forms.ImageField(required=False, label='Photo label')

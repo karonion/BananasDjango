@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
-from .forms import FeedbackForm
-from .models import Feedback
+from .forms import FeedbackForm, Addpost
+from .models import Feedback, Articles
 
 
 def index(request):  # Главная страница
-    return render(request, 'index.html')
+    article_scope = Articles.objects.all().order_by('-created_date')  # Получаем все посты отсортированные по дате
+    return render(request, 'index.html', {'article_scope': article_scope})
 
 
 def about(request):  # О нас
@@ -36,5 +37,17 @@ def feedback(request):  # Обратная связь
                   {'forms':FeedbackForm})
 
 def get_feedback(request):  # Получение обратной связи
-    feed = Feedback.objects.all()
+    feed = Feedback.objects.all().order_by('-date')
     return render(request, 'getfeedback.html', {'feed':feed})
+
+def add_post(request):
+    if request.method == 'POST':
+        created_by = request.POST.get('name')
+        preview = request.POST.get('preview')
+        text = request.POST.get('text')
+        photo = request.POST.get('preview_photo')
+        article = Articles(created_by=created_by, preview=preview, text=text)
+        article.save()
+        return HttpResponseRedirect('/')
+    else:
+        return render(request, 'addpost.html', {'form':Addpost})

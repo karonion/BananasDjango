@@ -3,18 +3,18 @@ from django.db import models
 
 
 class Articles(models.Model):  # Посты
-    name = models.TextField(default='None', null=False, max_length='50')
-    created_by = models.TextField(default='None')
+    name = models.TextField(default='NULL', max_length='50')
+    created_by = models.TextField(default='NULL')
     created_date = models.DateTimeField(default=django.utils.timezone.now(), null=False)
-    rank = models.IntegerField(default='0', null=False)
-    preview = models.TextField(default='None', null=False)
-    text = models.TextField(default='None', null=False)
-    category = models.CharField(default='None', max_length=255)
+    rank = models.IntegerField(default='0')
+    preview = models.TextField(default='NULL')
+    text = models.TextField(default='NULL')
+    category = models.CharField(default='NULL', max_length=255)
 
 
 class Feedback(models.Model):  # Обратная связь
     contact = models.CharField(max_length=255, default='None')
-    text = models.TextField(default='None', null=False)
+    text = models.TextField(default='NULL')
     date = models.DateTimeField(default=django.utils.timezone.now())
 
 
