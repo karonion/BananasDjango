@@ -25,7 +25,8 @@ def index_app(request):  # Приложение
     return render(request, 'bananaAPP/index_app.html', context=data)
 
 
-def feedback(request):  # Обратная связь
+# Обратная связь
+def feedback(request):
     if request.method == 'POST':
         feed = Feedback()
         feed.contact = request.POST.get('contact')
@@ -36,9 +37,12 @@ def feedback(request):  # Обратная связь
         return render(request, 'feedback.html',
                   {'forms':FeedbackForm})
 
-def get_feedback(request):  # Получение обратной связи
+
+# Получение обратной связи
+def get_feedback(request):
     feed = Feedback.objects.all().order_by('-date')
     return render(request, 'getfeedback.html', {'feed':feed})
+
 
 def add_post(request):
     if request.method == 'POST':
@@ -51,3 +55,9 @@ def add_post(request):
         return HttpResponseRedirect('/')
     else:
         return render(request, 'addpost.html', {'form':Addpost})
+
+
+# Пост детально
+def post_deatils(request, id):
+    article = Articles.objects.get(id=id)
+    return render(request, 'post.html', {'article': article})

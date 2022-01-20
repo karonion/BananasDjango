@@ -2,26 +2,38 @@ import django.utils.timezone
 from django.db import models
 
 
-class Articles(models.Model):  # Посты
+# Посты
+class Articles(models.Model):
     name = models.TextField(default='NULL', max_length='50')
     created_by = models.TextField(default='NULL')
-    created_date = models.DateTimeField(default=django.utils.timezone.now(), null=False)
+    created_date = models.DateTimeField(default=django.utils.timezone.now, null=False)
     rank = models.IntegerField(default='0')
     preview = models.TextField(default='NULL')
     text = models.TextField(default='NULL')
     category = models.CharField(default='NULL', max_length=255)
 
+    def __str__(self):
+        return self.name
 
-class Feedback(models.Model):  # Обратная связь
-    contact = models.CharField(max_length=255, default='None')
+
+# Обратная связь
+class Feedback(models.Model):
+    contact = models.CharField(max_length=255, default='NULL')
     text = models.TextField(default='NULL')
-    date = models.DateTimeField(default=django.utils.timezone.now())
+    date = models.DateTimeField(default=django.utils.timezone.now)
+
+    def __str__(self):
+        return self.contact
 
 
-class User(models.Model):  # Юзеры
+# Юзеры
+class User(models.Model):
     first_name = models.CharField(max_length=255, null=False)
     last_name = models.CharField(max_length=255, null=False)
     email = models.EmailField(max_length=255, null=False)
     password_hash = models.CharField(max_length=255, null=False)
-    created_date = models.DateTimeField(default=django.utils.timezone.now())
+    created_date = models.DateTimeField(default=django.utils.timezone.now)
+
+    def __str__(self):
+        return self.email
 

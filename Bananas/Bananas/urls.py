@@ -29,9 +29,11 @@ urlpatterns = [
     path('bananaAPP', views.index_app),  # Приложение
     path('feedback', views.feedback),  # Обратная связь (для юзера)
     path('getfeedback', views.get_feedback),  # Обратная связь (для админа)
-    path('addpost', views.add_post),
-    path('summernote/', include('django_summernote.urls')),
+    path('addpost', views.add_post),  # Создание поста
+    path('summernote/', include('django_summernote.urls')),  # Ссылка для передачи summernote
+    path('post/<int:id>', views.post_deatils)  # Пост детально
 ]
 
+# Дополнительная проверка для summernote
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
