@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
-from .forms import FeedbackForm, Addpost
+from .forms import FeedbackForm, PostForm
 from .models import Feedback, Articles
 
 
@@ -46,15 +46,13 @@ def get_feedback(request):
 
 def add_post(request):
     if request.method == 'POST':
-        created_by = request.POST.get('name')
-        preview = request.POST.get('preview')
-        text = request.POST.get('text')
-        photo = request.POST.get('preview_photo')
-        article = Articles(created_by=created_by, preview=preview, text=text)
-        article.save()
+        image_form = PostForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            image_form.save()
         return HttpResponseRedirect('/')
     else:
-        return render(request, 'addpost.html', {'form':Addpost})
+        image_form = PostForm()
+        return render(request, 'addpost.html', {'image_form': image_form})
 
 
 # Пост детально

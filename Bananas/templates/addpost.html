@@ -8,25 +8,25 @@
     </div>
       <div class="col-md-12 col-lg-12 align-self-center">
         <form class="needs-validation" method="post" enctype="multipart/form-data">
-             {{ myform.media }}
              {% csrf_token %}
           <div class="row g-1 align-items-center ">
             <div class="col-md-6 offset-md-2">
-                <p>{{ form.name.label }}</p>
-              {{ form.name }}
+                <p>{{ image_form.title.label }}</p>
+                {{ image_form.title }}
             </div>
             <div class="col-md-6 offset-md-2">
-                <p>{{ form.preview.label }}</p>
-                {{ form.preview }}
+                <p>{{ image_form.preview.label }}</p>
+                {{ image_form.preview }}
             </div>
             <div class="col-md-6 offset-md-2">
-                <p>{{ form.text.label }}</p>
-                {{ form.text }}
+                <p>{{ image_form.text.label }}</p>
+                {{ image_form.text }}
 
             </div>
             <div class="col-md-6 offset-md-2">
-                <p>{{ form.preview_photo.label }}</p>
-                {{ form.preview_photo }}
+                <p>{{ image_form.image.label }}</p>
+                {{ image_form.image }}
+
                 <button class="btn btn-primary btn-sm" type="submit" style="width:100px">Відправити</button>
             </div>
           </div>

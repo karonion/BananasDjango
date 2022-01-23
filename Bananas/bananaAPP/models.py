@@ -4,16 +4,17 @@ from django.db import models
 
 # Посты
 class Articles(models.Model):
-    name = models.TextField(default='NULL', max_length='50')
+    title = models.TextField(max_length=100)
     created_by = models.TextField(default='NULL')
     created_date = models.DateTimeField(default=django.utils.timezone.now, null=False)
     rank = models.IntegerField(default='0')
-    preview = models.TextField(default='NULL')
-    text = models.TextField(default='NULL')
+    preview = models.TextField(max_length=255)
+    text = models.TextField()
     category = models.CharField(default='NULL', max_length=255)
+    image = models.ImageField(upload_to='downloads')
 
     def __str__(self):
-        return self.name
+        return self.title
 
 
 # Обратная связь

@@ -1,5 +1,6 @@
 from django import forms
 from django_summernote.widgets import SummernoteWidget
+from .models import Articles
 
 
 # Форма обратной связи. Страница "Контакты".
@@ -24,9 +25,20 @@ class RegisterForm(forms.Form):
     confirm_password = forms.CharField(required=True, label='Повторіть пароль', widget=forms.PasswordInput())  # Написать проверку на совпадение с первым паролем
 
 
-# Создание поста
+'''# Создание поста
 class Addpost(forms.Form):
     name = forms.CharField(required=True, label="Your name", widget=forms.TextInput(attrs={'size':50, 'rows':'10', 'cols':'10'}))
     preview = forms.CharField(required=True, label="Preview", widget=forms.TextInput(attrs={'size':50}))
     text = forms.CharField(widget=SummernoteWidget)
-    preview_photo = forms.ImageField(required=False, label='Photo label')
+    preview_photo = forms.ImageField()'''
+
+# Создание поста
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Articles
+        fields = ('image', 'text', 'preview', 'title')
+        widgets ={
+            'text': SummernoteWidget,
+            'preview': forms.TextInput,
+            'title': forms.TextInput
+        }
