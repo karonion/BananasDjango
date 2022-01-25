@@ -59,3 +59,7 @@ def add_post(request):
 def post_deatils(request, id):
     article = Articles.objects.get(id=id)
     return render(request, 'post.html', {'article': article})
+
+
+def about_us(request):
+    return render(request, 'About-us.html')
