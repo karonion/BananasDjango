@@ -24,7 +24,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),  # Админка
     path('', views.index, name='home'),  # Главная страница
-    re_path(r'^contact', views.contact),  # Контакты
+    path(r'^contact', views.contact),  # Контакты
     path('bananaAPP', views.index_app),  # Приложение
     path('feedback', views.feedback),  # Обратная связь (для юзера)
     path('getfeedback', views.get_feedback),  # Обратная связь (для админа)
