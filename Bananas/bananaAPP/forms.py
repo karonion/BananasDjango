@@ -5,8 +5,8 @@ from .models import Articles
 
 # Форма обратной связи. Страница "Контакты".
 class FeedbackForm(forms.Form):
-    contact = forms.CharField(required=True, help_text='Месенджер або пошта', label=r"Як з вами зв'язатись?", widget=forms.TextInput(attrs={'class':'form-control'}))
-    text = forms.CharField(required=True, label='Текст', widget=forms.TextInput(attrs={'class':'form-control'}))
+    contact = forms.CharField(required=True, help_text='Месенджер або пошта', label=r"How do we get in touch with you?", widget=forms.TextInput(attrs={'class':'form-control', 'style':'width: 400px'}))
+    text = forms.CharField(required=True, label='Text', widget=forms.Textarea(attrs={'class':'form-control', 'style': 'height: 100px'}))
 
 
 # Форма логинизации

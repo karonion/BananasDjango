@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
 from .forms import FeedbackForm, PostForm
 from .models import Feedback, Articles
@@ -25,19 +26,6 @@ def index_app(request):  # Приложение
     return render(request, 'bananaAPP/index_app.html', context=data)
 
 
-# Обратная связь
-def feedback(request):
-    if request.method == 'POST':
-        feed = Feedback()
-        feed.contact = request.POST.get('contact')
-        feed.text = request.POST.get('text')
-        feed.save()
-        return HttpResponse('Агонь, всё получилось')
-    else:
-        return render(request, 'feedback.html',
-                  {'forms':FeedbackForm})
-
-
 # Получение обратной связи
 def get_feedback(request):
     feed = Feedback.objects.all().order_by('-date')
@@ -61,5 +49,14 @@ def post_deatils(request, id):
     return render(request, 'post.html', {'article': article})
 
 
+# О нас + форма обратной связи
 def about_us(request):
-    return render(request, 'About-us.html')
+    if request.method == 'POST':
+        feed = Feedback()
+        feed.contact = request.POST.get('contact')
+        feed.text = request.POST.get('text')
+        feed.save()
+        messages.add_message(request, messages.SUCCESS, 'Thank you for feedback, we are going to contact with you!')
+        return HttpResponseRedirect('/')
+    else:
+        return render(request, 'About-us.html',  {'forms':FeedbackForm})

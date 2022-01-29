@@ -1,5 +1,5 @@
 {% extends 'basic.html' %}
-{% block title %}Post{% endblock %}
+{% block title %}About us{% endblock %}
 {% block body%}
 <div class="container" style="margin-top:70px" >
     <div class="raw">
@@ -27,9 +27,20 @@
                         <li style="text-align: left;">Email - <a href="mailto:ig.vasylenko2@gmail.com">ig.vasylenko2@gmail.com</a></li>
                         <li style="text-align: left;"><a href="https://github.com/karonion">GitHub</a></li>
                     </ul>
+                    <form class="needs-validation" novalidate="" method="POST" action="">
+                        <div class="alert-small alert-info">Remain your feedback if needed</div>
+                        {% csrf_token %}
+                        {{ forms.contact.label }}
+                        {{ forms.contact }}
+                        {{ forms.text.label }}
+                        {{ forms.text }}
+
+                        <input type="submit" value="Submit" class="w-100 btn btn-lg btn-warning" style="margin-top:10px">
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 

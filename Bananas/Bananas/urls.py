@@ -26,7 +26,6 @@ urlpatterns = [
     path('', views.index, name='home'),  # Главная страница
     path(r'^contact', views.contact),  # Контакты
     path('bananaAPP', views.index_app),  # Приложение
-    path('feedback', views.feedback),  # Обратная связь (для юзера)
     path('getfeedback', views.get_feedback),  # Обратная связь (для админа)
     path('addpost', views.add_post),  # Создание поста
     path('summernote/', include('django_summernote.urls')),  # Ссылка для передачи summernote

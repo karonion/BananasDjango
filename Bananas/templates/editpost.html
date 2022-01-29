@@ -1,6 +1,13 @@
 {% extends 'basic.html' %}
 {% block title %}Creating post{% endblock %}
 {% block body %}
+{% if messages %}
+{%for message in messages %}
+<div class="d-flex justify-content-center" style="margin-top:70px">
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+</div>
+{% endfor %}
+{% endif %}
 <div class="container ">
   <main>
     <div class="py-5 text-center">
