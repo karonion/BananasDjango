@@ -85,14 +85,14 @@ def register(request):
                 user.last_name = last_name
                 user.save()
                 # Отправка сообщения на почту об успешной регистрации с логином и паролем
-                context = username, password  # Собираем логин и пароль для отправки на почту
-                msg = render_to_string('registration/registration-succesful.html', {'context': context})  # Собираем сообщение
+                msg = render_to_string('registration/registration-succesful.html', {'login': username, 'password': password})  # Собираем сообщение
                 send_mail(
                     'Registration succesful',
                     msg,
                     settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[f'{email}'],
-                    fail_silently=False
+                    fail_silently=False,
+                    html_message=msg
                 )
                 #  Редирект на главную страницу с сообщением об успешной регистрации
                 messages.add_message(request, messages.SUCCESS, 'Thank you for registration, your login and password have been sent to email.')

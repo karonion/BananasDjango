@@ -1,1 +1,17 @@
-hello
+<!DOCTYPE html>
+{% load static %}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<p>Hello!</p>
+<p>Thank you for registration! We won't bother you unnecessaryemails.</p>
+<p><strong>Login:</strong> {{ login }}</p>
+<p><strong>Password:</strong> {{ password }}</p>
+<p>If you have any questions - send me email or use contact form on our site.</p>
+<p>Best wishes, Igor.</p>
+</body>
