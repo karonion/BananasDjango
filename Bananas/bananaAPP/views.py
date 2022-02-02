@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from .forms import FeedbackForm, PostForm, RegisterForm
 from .models import Feedback, Articles
 
@@ -35,8 +35,8 @@ def add_post(request):
     if request.method == 'POST':
         image_form = PostForm(request.POST, request.FILES)
         if image_form.is_valid():
-            image_form.save()
-        return HttpResponseRedirect('/')
+             # image_form.save()
+            return HttpResponseForbidden()
     else:
         image_form = PostForm()
         return render(request, 'addpost.html', {'image_form': image_form})
@@ -74,15 +74,17 @@ def register(request):
             username = request.POST['email']
             email = request.POST['email']
             password = request.POST['password']
-            print(f'username is {username}, password is {password}, email is {email}')
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user.first_name = first_name
-            user.last_name = last_name
-            user.save()
-            messages.add_message(request, messages.SUCCESS, 'Thank you for registration, your login and password have been sent to email.')
-            return HttpResponseRedirect('/')
-        else:
-            return HttpResponse('Not valid')
+            confirm_password = request.POST['confirm_password']
+            if password != confirm_password:
+                messages.add_message(request, messages.WARNING, 'Passwords does not match, please try again!')
+                return HttpResponseRedirect('register')
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.first_name = first_name
+                user.last_name = last_name
+                user.save()
+                messages.add_message(request, messages.SUCCESS, 'Thank you for registration, your login and password have been sent to email.')
+                return HttpResponseRedirect('/')
     else:
         form = RegisterForm()
         return render(request, 'registration/register.html', {'form': form})

@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from bananaAPP import views
+from django.views.defaults import permission_denied
+from functools import partial as curry
 
 
 urlpatterns = [
@@ -30,7 +32,7 @@ urlpatterns = [
     path('post/<int:id>', views.post_deatils, name='post_details'),  # Пост детально
     path('upload/', views.add_post),  # Для загрузки файлов на сервер
     path('about', views.about_us, name='about_us'),  # О нас
-    path('register', views.register, name='register'),  # Регистрация
+    path('register', views.register, name='registration'),  # Регистрация
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 

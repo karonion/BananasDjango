@@ -13,16 +13,11 @@
         <div class="col align-self-center col-md-4 col-lg-4">
           <form class="needs-validation" novalidate="" method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-
-
+            <a href="{% url 'home' %}"><img class="mb-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bananas.svg/1280px-Bananas.svg.png" alt="" width="72" height="57"></a>
             <h1 class="h3 mb-3 fw-normal">Log in</h1>
             {% if form.errors %}
                 <div class="alert alert-warning">
-                    {% for error in form.errors %}
-                    {{ error }}
-                    {{ form.errors }}
-                    {% endfor %}
+                    Sorry, login or password does not match, try again please.
                 </div>
             {% endif %}
                 <div class="mb-3">

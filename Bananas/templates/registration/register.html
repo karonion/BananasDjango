@@ -11,12 +11,18 @@
 <div class="container">
   <main>
     <div class="py-4 text-center">
-      <img class="d-block mx-auto mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <a href="{% url 'home' %}"><img class="d-block mx-auto mb-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bananas.svg/1280px-Bananas.svg.png" alt="" width="72" height="57"></a>
       <h2>Registration</h2>
     </div>
-
     <div class="row g-5"  style="margin-left:350px">
       <div class="col-md-7 col-lg-7">
+        {% if messages %}
+        {%for message in messages %}
+        <div class="d-flex justify-content-center" style="margin-top:70px">
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        </div>
+        {% endfor %}
+        {% endif %}
           {% if form.errors %}
             <div class="d-flex justify-content-center" style="margin-top:70px">
                 <div class="alert alert-warning">Your login and password does not match. Please try again.</div>
