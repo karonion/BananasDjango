@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.conf import settings
+from django.template.loader import render_to_string
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from .forms import FeedbackForm, PostForm, RegisterForm
 from .models import Feedback, Articles
@@ -75,7 +76,7 @@ def register(request):
             email = request.POST['email']
             password = request.POST['password']
             confirm_password = request.POST['confirm_password']
-            if password != confirm_password:
+            if password != confirm_password:  # Если пароли не совпадают - сообщаем юзеру и редиректим на регистрацию
                 messages.add_message(request, messages.WARNING, 'Passwords does not match, please try again!')
                 return HttpResponseRedirect('register')
             else:
@@ -83,6 +84,17 @@ def register(request):
                 user.first_name = first_name
                 user.last_name = last_name
                 user.save()
+                # Отправка сообщения на почту об успешной регистрации с логином и паролем
+                context = username, password  # Собираем логин и пароль для отправки на почту
+                msg = render_to_string('registration/registration-succesful.html', {'context': context})  # Собираем сообщение
+                send_mail(
+                    'Registration succesful',
+                    msg,
+                    settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[f'{email}'],
+                    fail_silently=False
+                )
+                #  Редирект на главную страницу с сообщением об успешной регистрации
                 messages.add_message(request, messages.SUCCESS, 'Thank you for registration, your login and password have been sent to email.')
                 return HttpResponseRedirect('/')
     else:

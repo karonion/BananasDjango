@@ -142,3 +142,12 @@ LOGIN_REDIRECT_URL = '/'
 
 #  Редирект после успешного логаута
 LOGOUT_REDIRECT_URL = '/'
+
+# Настройки почтового сервера
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ig.vasylenko2@gmail.com'
+EMAIL_HOST_PASSWORD = '1dn2qy36'
+DEFAULT_FROM_EMAIL = 'ig.vasylenko2@gmail.com'
+DEFAULT_TO_EMAIL = 'karonion4ik@gmail.com'
