@@ -8,7 +8,7 @@
                 <div class="col-12 lead" style="padding:10px" >
                     <h4 style="text-align: left;">&nbsp;</h4>
                     <p><img src="https://i.ibb.co/c1yPcPz/photo-2021-08-20-08-16-16.jpg" alt="" width="183" height="183" style="float: right; border-radius: 10px;" /></p>
-                    <div class="h4">Hello! My name is Igor Vasilenko. I developed this site to show you my abilities in Django-framework. Also there is&nbsp;link where you can see presented features.</div>
+                    <div class="lead">Hello! My name is Igor Vasilenko. I developed this site to show you my abilities in Django-framework. Also there is&nbsp;link where you can see presented features.</div>
                     <hr />
                     <p style="text-align: left;">For now i have skill in:</p>
                     <ul>
@@ -28,13 +28,12 @@
                         <li style="text-align: left;"><a href="https://github.com/karonion">GitHub</a></li>
                     </ul>
                     <form class="needs-validation" novalidate="" method="POST" action="">
-                        <div class="alert-small alert-info">Remain your feedback if needed</div>
                         {% csrf_token %}
+                        <div class="alert-small alert-info " style="width: 300px;">Remain your feedback if needed</div>
                         {{ forms.contact.label }}
                         {{ forms.contact }}
                         {{ forms.text.label }}
                         {{ forms.text }}
-
                         <input type="submit" value="Submit" class="w-100 btn btn-lg btn-warning" style="margin-top:10px">
                     </form>
                 </div>

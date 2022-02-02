@@ -132,5 +132,13 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Пути загрузки файлов на сервер
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os .path.join(BASE_DIR, 'media/')
+
+#  Редирект после успешной логинизации
+LOGIN_REDIRECT_URL = '/'
+
+#  Редирект после успешного логаута
+LOGOUT_REDIRECT_URL = '/'

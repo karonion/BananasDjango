@@ -14,24 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path, include
-from bananaAPP import views
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-
+from bananaAPP import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Админка
+    path('admin/', admin.site.urls, name='admin'),  # Админка
     path('', views.index, name='home'),  # Главная страница
-    path(r'^contact', views.contact),  # Контакты
-    path('bananaAPP', views.index_app),  # Приложение
-    path('getfeedback', views.get_feedback),  # Обратная связь (для админа)
-    path('addpost', views.add_post),  # Создание поста
+    path('bananaAPP', views.index_app, name='index_app'),  # Приложение
+    path('getfeedback', views.get_feedback, name='get_feedback'),  # Обратная связь (для админа)
+    path('addpost', views.add_post, name='add_post'),  # Создание поста
     path('summernote/', include('django_summernote.urls')),  # Ссылка для передачи summernote
-    path('post/<int:id>', views.post_deatils),  # Пост детально
-    path('upload/', views.add_post),
-    path('about', views.about_us)
+    path('post/<int:id>', views.post_deatils, name='post_details'),  # Пост детально
+    path('upload/', views.add_post),  # Для загрузки файлов на сервер
+    path('about', views.about_us, name='about_us'),  # О нас
+    path('register', views.register, name='register'),  # Регистрация
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 # Дополнительная проверка для summernote

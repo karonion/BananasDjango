@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<div class="container">
+  <main>
+    <div class="py-4 text-center">
+      <img class="d-block mx-auto mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+      <h2>Registration</h2>
+    </div>
+
+    <div class="row g-5"  style="margin-left:350px">
+      <div class="col-md-7 col-lg-7">
+          {% if form.errors %}
+            <div class="d-flex justify-content-center" style="margin-top:70px">
+                <div class="alert alert-warning">Your login and password does not match. Please try again.</div>
+            </div>
+          {% endif %}
+        <form class="needs-validation" novalidate="" method="POST" action="" >
+              {% csrf_token %}
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                </div>
+            <div class="col-sm-6">
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+            </div>
+            <div class="col-12">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+            </div>
+            <div class="col-12">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+           <div class="col-12">
+                {{ form.confirm_password.label_tag }}
+                {{ form.confirm_password }}
+            </div>
+          <hr class="my-4">
+            <input type="submit" class="w-100 btn btn-lg btn-warning" value="submit">
+         </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

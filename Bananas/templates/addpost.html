@@ -10,18 +10,17 @@
         <form class="needs-validation" method="post" enctype="multipart/form-data">
              {% csrf_token %}
           <div class="row g-1 align-items-center ">
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-1 offset-md-2 ">
                 <p>{{ image_form.title.label }}</p>
                 {{ image_form.title }}
             </div>
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-2 offset-md-1">
                 <p>{{ image_form.preview.label }}</p>
-                {{ image_form.preview }}
+                    {{ image_form.preview }}
             </div>
-            <div class="col-md-6 offset-md-2">
+            <div class="col-md-6 offset-md-2 ">
                 <p>{{ image_form.text.label }}</p>
                 {{ image_form.text }}
-
             </div>
             <div class="col-md-6 offset-md-2">
                 <p>{{ image_form.image.label }}</p>

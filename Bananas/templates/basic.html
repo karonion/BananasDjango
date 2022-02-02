@@ -33,16 +33,29 @@
             <a class="nav-link" href="/getfeedback">FeedBack</a>
           </li>
         </ul>
-      </div>
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/login">Log in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/register">Register</a>
-          </li>
-        </ul>
-    </div>
+        {% if user.is_authenticated %}
+          </div>
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <div class="nav-link active">Hello, {{ user.get_short_name }}!</div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+            </li>
+          </ul>
+          </div>
+        {% else %}
+          </div>
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="accounts/login">Log in</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/register">Register</a>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
   </nav>
 {% block body %}{% endblock %}
   {% block tail %}{% endblock %}

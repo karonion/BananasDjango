@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <meta charset="UTF-8">
+    <title>Log in</title>
+</head>
+<body class="text-center">
+<div class="container" style="margin-top:150px">
+    <div class="row justify-content-center">
+        <div class="col align-self-center col-md-4 col-lg-4">
+          <form class="needs-validation" novalidate="" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+
+
+            <h1 class="h3 mb-3 fw-normal">Log in</h1>
+            {% if form.errors %}
+                <div class="alert alert-warning">
+                    {% for error in form.errors %}
+                    {{ error }}
+                    {{ form.errors }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+                <div class="mb-3">
+                    <label for="EmailInput" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="EmailInput" name="username" placeholder="email@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="PasswordInput" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="PasswordInput" name="password">
+                </div>
+            <div> <input type="submit" class="w-100 btn btn-md btn-warning" value="Submit"></div>
+
+            <p class="mt-5 mb-3 text-muted">© 2022 Banana's Men</p>
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

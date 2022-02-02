@@ -17,6 +17,7 @@
                 </div>
                 <p class="mt-5 display-4">{{ article.preview }}</p>
                 <p class="lead text-capitalize">{{ article.text | safe }}</p>
+                <p>Likes: {{ article.likes }}</p>
                 <div class="row justify-content-between">
                     <div class="col-8">
                         <p class="text-capitalize lead"><span class="fw-bold "> Мандрівник:</span> {{ article.created_by }}</p>
