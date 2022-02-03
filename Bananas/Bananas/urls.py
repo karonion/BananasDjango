@@ -34,6 +34,7 @@ urlpatterns = [
     path('about', views.about_us, name='about_us'),  # О нас
     path('register', views.register, name='registration'),  # Регистрация
     path('accounts/', include('django.contrib.auth.urls')),
+    path('search/', views.SearchResultsView.as_view(), name='search_results'),
 ]
 
 # Дополнительная проверка для summernote

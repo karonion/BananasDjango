@@ -23,7 +23,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Articles
         fields = ('image', 'text', 'preview', 'title')
-        widgets ={
+        widgets = {
             'text': SummernoteWidget,
             'preview': forms.TextInput(attrs={"class": "form-control form-control-sm"}),
             'title': forms.TextInput(attrs={"class": "form-control form-control-sm"})

@@ -8,7 +8,6 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
   <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color:#FDCE2A">  <!-- NAVIGATION COLOR -->
     <div class="container-fluid">
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bananas.svg/1280px-Bananas.svg.png" width="50px" style="border: 3px">
@@ -28,6 +27,9 @@
             <a class="nav-link" href="{% url 'add_post' %}" style="color: white">Add post</a>
           </li>
         </ul>
+        <form action="{% url 'search_results' %}" method="get" class="w-25 me-3">
+          <input name="search" type="text" type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        </form>
         {% if user.is_authenticated %}
           </div>
           <ul class="navbar-nav me-auto mb-2 mb-md-0">

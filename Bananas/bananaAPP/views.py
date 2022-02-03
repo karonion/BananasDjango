@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
+from django.db.models import Q
+from django.views.generic import ListView
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -12,10 +14,6 @@ from .models import Feedback, Articles
 def index(request):  # Главная страница
     article_scope = Articles.objects.all().order_by('-created_date')  # Получаем все посты отсортированные по дате
     return render(request, 'index.html', {'article_scope': article_scope})
-
-
-def contact(request):  # Контакты
-    return HttpResponse('<h2> Our contacts </h2>')
 
 
 def index_app(request):  # Приложение
@@ -32,12 +30,13 @@ def get_feedback(request):
     return render(request, 'getfeedback.html', {'feed':feed})
 
 
+#  Добавление поста для демонстрации Юзеру
 def add_post(request):
     if request.method == 'POST':
         image_form = PostForm(request.POST, request.FILES)
         if image_form.is_valid():
-             # image_form.save()
-            return HttpResponseForbidden()
+            image_form.save()
+            return HttpResponseRedirect('/')
     else:
         image_form = PostForm()
         return render(request, 'addpost.html', {'image_form': image_form})
@@ -60,6 +59,15 @@ def about_us(request):
         feed.text = request.POST.get('text')
         feed.save()
         messages.add_message(request, messages.SUCCESS, 'Thank you for feedback, we are going to contact with you!')
+        #  Отправляем администратору уведомление о новом фидбеке
+        send_mail(
+            'New feedback!',
+            f'New feedback from {feed.contact} with text {feed.text}.',
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.DEFAULT_TO_EMAIL],
+            fail_silently=False
+
+        )
         return HttpResponseRedirect('/')
     else:
         return render(request, 'About-us.html',  {'forms': FeedbackForm})
@@ -85,14 +93,15 @@ def register(request):
                 user.last_name = last_name
                 user.save()
                 # Отправка сообщения на почту об успешной регистрации с логином и паролем
-                msg = render_to_string('registration/registration-succesful.html', {'login': username, 'password': password})  # Собираем сообщение
+                msg = render_to_string('registration/registration-succesful.html', {'login': username,
+                                                                                    'password': password})  # Собираем сообщение
                 send_mail(
                     'Registration succesful',
                     msg,
                     settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[f'{email}'],
                     fail_silently=False,
-                    html_message=msg
+                    html_message=msg  # Указываем, что сообщение - HTML файл
                 )
                 #  Редирект на главную страницу с сообщением об успешной регистрации
                 messages.add_message(request, messages.SUCCESS, 'Thank you for registration, your login and password have been sent to email.')
@@ -100,3 +109,16 @@ def register(request):
     else:
         form = RegisterForm()
         return render(request, 'registration/register.html', {'form': form})
+
+
+# Выдача результатов поиска по сайту
+class SearchResultsView(ListView):
+    model = Articles
+    template_name = 'search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        object_list = Articles.objects.filter(Q(text__icontains=query) |
+                                              Q(preview__icontains=query) |
+                                              Q(title__icontains=query))
+        return object_list
