@@ -13,11 +13,11 @@
 </div>
 <div class="album py-5">
     <div class="container" style="width:100%">
-      <div class="row row-cols-1 row-cols-md-3 row-cols-xs-1 g-3">
-        {% for el in article_scope %}
+      <div class="row row-cols-3 row-cols-md-3 row-cols-xs-3 g-3">
+        {% for el in page_obj %}
         <div class="col" style="width:420px">
           <div class="card shadow-sm">
-               <svg class=" card-img-top" width="100%" height="300" style="background-image:url(http://127.0.0.1:8000/media/{{el.image}}); background-size:cover; background-repeat: no-repeat; background-position:center"  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: {{ el.preview }}" preserveAspectRatio="xMidYMid slice" focusable="false"></svg>
+               <svg class="card-img-top" width="100%" height="300" style="background-image:url(http://127.0.0.1:8000/media/{{el.image}}); background-size:cover; background-repeat: no-repeat; background-position:center"  xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: {{ el.preview }}" preserveAspectRatio="xMidYMid slice" focusable="false"></svg>
             <div class="card-body">
               <p class="lead">{{ el.title }}</p>
               <div class="d-flex justify-content-left align-items-center">
@@ -33,4 +33,15 @@
       </div>
     </div>
   </div>
+<nav class="align-content-center">
+    <ul class="pagination justify-content-center">
+      {% for p in page_obj.paginator.page_range %}
+      {% if page_obj.number == p %}
+      <li class="page-item active"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+      {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{p}}">{{p}}</a></li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+</nav>
 {% endblock %}

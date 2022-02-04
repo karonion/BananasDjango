@@ -7,7 +7,7 @@ from django_summernote.admin import SummernoteModelAdmin
 class SummernoteModelForTextArea(SummernoteModelAdmin):
     summernote_fields = ('text',)
     list_display = ('title', 'preview', 'created_date')
-    fields = ('title', 'preview', 'text', 'created_by', 'created_date', 'category')
+    fields = ('title', 'preview', 'text', 'created_by', 'created_date', 'category', 'image')
 
 
 class FeedbackAdmin(admin.ModelAdmin):

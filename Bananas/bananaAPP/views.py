@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from .forms import FeedbackForm, PostForm, RegisterForm
 from .models import Feedback, Articles
@@ -13,7 +14,11 @@ from .models import Feedback, Articles
 
 def index(request):  # Главная страница
     article_scope = Articles.objects.all().order_by('-created_date')  # Получаем все посты отсортированные по дате
-    return render(request, 'index.html', {'article_scope': article_scope})
+    # Пагинация
+    paginator = Paginator(article_scope, 6)  # Пагинация по 6 элементов
+    page_number = request.GET.get('page')  # Узнаём номер страницы
+    page_obj = paginator.get_page(page_number)  # По номеру страницы передаём список обьектов
+    return render(request, 'index.html', {'page_obj': page_obj})
 
 
 def index_app(request):  # Приложение

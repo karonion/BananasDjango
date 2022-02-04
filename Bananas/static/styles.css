@@ -11,8 +11,6 @@
   position: absolute;
 }
 
-
-
 .input__file-button-text {
   line-height: 1;
   margin-top: 1px;
@@ -68,12 +66,31 @@
 overflow: hidden;
 width: 820px;
 }
-
-.images-post img {
-max-width: 820px;
-width:expression(this.width > 820 ? "820px" : this.width);
+.pagination > li > a
+{
+    background-color: white;
+    color: #5A4181;
 }
 
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+}
 
+.pagination > .active > a
+{
+    color: white;
+    background-color: #5A4181 !Important;
+    border: solid 1px #5A4181 !Important;
+}
 
-
+.pagination > .active > a:hover
+{
+    background-color: #5A4181 !Important;
+    border: solid 1px #5A4181;
+}
