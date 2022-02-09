@@ -28,7 +28,7 @@
                 <div class="alert alert-warning">Your login and password does not match. Please try again.</div>
             </div>
           {% endif %}
-        <form class="needs-validation" novalidate="" method="POST" action="" >
+        <form class="needs-validation" novalidate="" method="POST" action="" id="new_user_form" >
               {% csrf_token %}
             <div class="row g-3">
                 <div class="col-sm-6">
@@ -52,7 +52,7 @@
                 {{ form.confirm_password }}
             </div>
           <hr class="my-4">
-            <input type="submit" class="w-100 btn btn-lg btn-warning" value="submit">
+            <input type="submit" class="w-100 btn btn-sm btn-warning " value="register" style="margin-top:10px">
          </div>
         </form>
       </div>

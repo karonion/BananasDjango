@@ -40,8 +40,8 @@ def add_post(request):
     if request.method == 'POST':
         image_form = PostForm(request.POST, request.FILES)
         if image_form.is_valid():
-            image_form.save()
-            return HttpResponseRedirect('/')
+            #image_form.save()
+            return HttpResponseForbidden()
     else:
         image_form = PostForm()
         return render(request, 'addpost.html', {'image_form': image_form})
@@ -50,7 +50,7 @@ def add_post(request):
 # Пост детально
 def post_deatils(request, id):
     if request.method == 'POST':
-        pass
+        pass  # Для лайков\комментариев
     else:
         article = Articles.objects.get(id=id)
         return render(request, 'post.html', {'article': article})
@@ -71,7 +71,6 @@ def about_us(request):
             settings.DEFAULT_FROM_EMAIL,
             [settings.DEFAULT_TO_EMAIL],
             fail_silently=False
-
         )
         return HttpResponseRedirect('/')
     else:
@@ -123,6 +122,7 @@ class SearchResultsView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('search')
+        # Собираем список результатов, включаем результаты по параметрам.
         object_list = Articles.objects.filter(Q(text__icontains=query) |
                                               Q(preview__icontains=query) |
                                               Q(title__icontains=query))

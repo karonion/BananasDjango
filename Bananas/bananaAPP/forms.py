@@ -26,5 +26,5 @@ class PostForm(forms.ModelForm):
         widgets = {
             'text': SummernoteWidget,
             'preview': forms.TextInput(attrs={"class": "form-control form-control-sm"}),
-            'title': forms.TextInput(attrs={"class": "form-control form-control-sm"})
+            'title': forms.TextInput(attrs={"class": "form-control form-control-sm"}),
         }

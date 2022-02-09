@@ -5,14 +5,10 @@ from django.db import models
 # Посты
 class Articles(models.Model):
     title = models.CharField(max_length=100)
-    created_by = models.CharField(default='NULL', max_length=255)
     created_date = models.DateTimeField(default=django.utils.timezone.now, null=False)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
     preview = models.CharField(max_length=255)
     text = models.TextField()
-    category = models.CharField(default='NULL', max_length=255)
-    image = models.ImageField(upload_to='downloads')
+    image = models.ImageField(upload_to='downloads', verbose_name='Image preview')
 
     def __str__(self):
         return self.title
