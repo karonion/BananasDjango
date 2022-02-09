@@ -37,7 +37,7 @@ def feedback(request):
         return render(request, 'feedback.html',
                   {'forms':FeedbackForm})
 
-
+# asd
 # Получение обратной связи
 def get_feedback(request):
     feed = Feedback.objects.all().order_by('-date')
